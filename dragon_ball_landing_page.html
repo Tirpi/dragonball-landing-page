@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="hu" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball - Awaken Your Saiyan Spirit</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        dbOrange: {
+                            light: '#FF9E40',
+                            DEFAULT: '#F57C00',
+                            dark: '#E65100',
+                        },
+                        dbYellow: {
+                            light: '#FFF59D',
+                            DEFAULT: '#FFD54F',
+                            dark: '#FFB300',
+                        },
+                        dbBlue: {
+                            light: '#42A5F5',
+                            DEFAULT: '#1565C0',
+                            dark: '#0D47A1',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-reverse': 'floatReverse 8s ease-in-out infinite',
+                        'spin-slow': 'spin 16s linear infinite',
+                        'aura-pulse': 'auraPulse 1.5s ease-in-out infinite',
+                        'cosmic-shift': 'cosmicShift 20s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar matching DB theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050609;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #F57C00, #FFD54F);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD54F;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(4deg); }
+        }
+
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(16px) rotate(-5deg); }
+        }
+
+        @keyframes auraPulse {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(245, 124, 0, 0.4), inset 0 0 10px rgba(245, 124, 0, 0.2);
+                border-color: rgba(245, 124, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 35px rgba(255, 213, 79, 0.9), inset 0 0 20px rgba(255, 213, 79, 0.5);
+                border-color: rgba(255, 213, 79, 1);
+            }
+        }
+
+        @keyframes cosmicShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .animate-float-reverse {
+            animation: floatReverse 7s ease-in-out infinite;
+        }
+
+        /* Glassmorphism utility classes */
+        .glass-panel {
+            background: rgba(8, 10, 16, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-panel-heavy {
+            background: rgba(5, 6, 10, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(14, 17, 27, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(22, 26, 42, 0.8);
+            border-color: rgba(245, 124, 0, 0.4);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(245, 124, 0, 0.1);
+        }
+
+        /* Dynamic Cosmic Nebular Background */
+        .cosmic-bg {
+            background: radial-gradient(circle at 50% 50%, #0d0e15 0%, #040508 100%);
+            background-size: 200% 200%;
+            animation: cosmicShift 25s ease-in-out infinite;
+        }
+
+        /* Custom radial light source */
+        .radial-spotlight {
+            background: radial-gradient(800px circle at var(--x, 50%) var(--y, 50%), rgba(21, 101, 192, 0.08), transparent 80%);
+        }
+
+        /* Shake animation for screen effects */
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            10% { transform: translate(-5px, -3px) rotate(-1deg); }
+            20% { transform: translate(-4px, 3px) rotate(1.5deg); }
+            30% { transform: translate(5px, 2px) rotate(0deg); }
+            40% { transform: translate(2px, -3px) rotate(1deg); }
+            50% { transform: translate(-3px, 4px) rotate(-1.5deg); }
+            60% { transform: translate(4px, -2px) rotate(0deg); }
+            70% { transform: translate(-4px, 2px) rotate(-1deg); }
+            80% { transform: translate(3px, 3px) rotate(1.5deg); }
+            90% { transform: translate(-2px, -3px) rotate(0deg); }
+        }
+
+        .shake-active {
+            animation: shake 0.35s ease-in-out infinite;
+        }
+
+        /* Custom cursor style */
+        .custom-cursor {
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(21,101,192,0.8) 75%, transparent 100%);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            transition: width 0.1s, height 0.1s;
+            mix-blend-mode: screen;
+            box-shadow: 0 0 15px rgba(21,101,192,0.9);
+        }
+
+        .custom-cursor-click {
+            width: 32px;
+            height: 32px;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(245,124,0,0.9) 60%, transparent 100%);
+            box-shadow: 0 0 25px rgba(245,124,0,1);
+        }
+    </style>
+</head>
+<body class="cosmic-bg text-slate-100 overflow-x-hidden font-sans select-none radial-spotlight">
+
+    <!-- Custom interactive dynamic background canvas (Electricity & Lightning Sparks) -->
+    <canvas id="kiCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Custom Pointer trail element -->
+    <div id="cursorGlow" class="custom-cursor hidden lg:block"></div>
+
+    <!-- Power Loading Overlay -->
+    <div id="loader" class="fixed inset-0 z-50 bg-[#040508] flex flex-col items-center justify-center transition-all duration-700">
+        <div class="relative flex flex-col items-center p-8 max-w-md text-center">
+            <!-- Electrical aura loader -->
+            <div class="w-32 h-32 rounded-full border-4 border-dashed border-dbBlue flex items-center justify-center animate-spin-slow mb-8 shadow-[0_0_40px_rgba(21,101,192,0.4)]">
+                <div class="w-24 h-24 rounded-full border-2 border-dbYellow animate-pulse flex items-center justify-center">
+                    <i class="fa-solid fa-bolt text-dbYellow text-4xl animate-bounce"></i>
+                </div>
+            </div>
+            <h2 class="font-display text-2xl tracking-widest text-slate-200 mb-2 uppercase">Indukálás: <span class="text-dbBlue-light">Katalizátor</span></h2>
+            <p class="text-xs text-slate-400 font-mono tracking-wider mb-6" id="loader-percent">FESZÜLTSÉG: 0%</p>
+            
+            <div class="w-64 h-1.5 bg-slate-800 rounded-full overflow-hidden mb-6 relative">
+                <div id="loader-bar" class="w-0 h-full bg-gradient-to-r from-dbBlue to-dbOrange shadow-[0_0_12px_rgba(21,101,192,0.9)] transition-all duration-100"></div>
+            </div>
+            
+            <button id="enter-btn" class="hidden px-8 py-3 bg-gradient-to-r from-dbBlue to-dbOrange hover:from-dbOrange hover:to-dbBlue text-slate-50 font-bold font-display uppercase rounded-lg shadow-lg hover:shadow-[0_0_25px_rgba(21,101,192,0.8)] tracking-wider transition-all duration-300 transform scale-90 opacity-0 animate-bounce">
+                Energia Felszabadítása
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-7xl">
+        <nav class="glass-panel px-6 py-4 rounded-2xl flex items-center justify-between shadow-2xl">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-dbBlue to-dbOrange flex items-center justify-center shadow-[0_0_15px_rgba(21,101,192,0.4)] transition-all duration-300 group-hover:scale-110">
+                    <span class="font-display font-black text-slate-100 text-lg">DB</span>
+                </div>
+                <span class="font-display tracking-widest text-lg font-black bg-gradient-to-r from-slate-50 to-slate-200 bg-clip-text text-transparent group-hover:text-dbYellow transition-colors">SAIYAN<span class="text-dbOrange font-extrabold">SPIRIT</span></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-1 font-mono text-sm">
+                <a href="#hero" class="px-4 py-2 text-slate-300 hover:text-dbOrange hover:bg-white/5 rounded-lg transition-all">KEZDŐLAP</a>
+                <a href="#characters" class="px-4 py-2 text-slate-300 hover:text-dbOrange hover:bg-white/5 rounded-lg transition-all">LEGENDÁK</a>
+                <a href="#timeline" class="px-4 py-2 text-slate-300 hover:text-dbOrange hover:bg-white/5 rounded-lg transition-all">FORMÁK</a>
+                <a href="#sagas" class="px-4 py-2 text-slate-300 hover:text-dbOrange hover:bg-white/5 rounded-lg transition-all">SAGÁK</a>
+                <a href="#summon" class="px-4 py-2 text-slate-300 hover:text-dbOrange hover:bg-white/5 rounded-lg transition-all flex items-center gap-1.5"><i class="fa-solid fa-star text-dbYellow animate-pulse"></i> MEGIDÉZÉS</a>
+                <a href="#gallery" class="px-4 py-2 text-slate-300 hover:text-dbOrange hover:bg-white/5 rounded-lg transition-all">GALÉRIA</a>
+            </div>
+
+            <!-- Interactive CTA -->
+            <div class="flex items-center space-x-4">
+                <a href="#summon" class="px-5 py-2.5 bg-gradient-to-r from-dbBlue to-dbOrange text-slate-50 font-bold font-display rounded-xl shadow-[0_0_15px_rgba(21,101,192,0.3)] hover:shadow-[0_0_25px_rgba(245,124,0,0.6)] transform hover:-translate-y-0.5 transition-all text-sm uppercase">
+                    Gömbök Gyűjtése
+                </a>
+            </div>
+        </nav>
+
+        <!-- Ki scroll indicator bar (Charging meter) -->
+        <div class="w-full bg-slate-950/80 h-1 rounded-b-full overflow-hidden mt-1.5 flex items-center">
+            <div id="scrollMeter" class="h-full bg-gradient-to-r from-dbBlue via-dbYellow to-dbOrange w-0 shadow-[0_0_10px_rgba(245,124,0,0.8)] transition-all"></div>
+        </div>
+    </header>
+
+    <!-- Fullscreen Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 overflow-hidden z-10">
+        <!-- Floating Elements inside Hero -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-[20%] left-[5%] w-80 h-80 bg-dbBlue/5 rounded-full filter blur-3xl animate-float"></div>
+            <div class="absolute bottom-[15%] right-[5%] w-96 h-96 bg-dbOrange/5 rounded-full filter blur-3xl animate-float-reverse"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Headline Text Elements -->
+            <div class="lg:col-span-7 space-y-8 text-center lg:text-left relative">
+                <div class="inline-flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-md">
+                    <span class="w-2.5 h-2.5 rounded-full bg-dbBlue-light animate-ping"></span>
+                    <span class="text-xs font-mono font-bold tracking-widest text-slate-300 uppercase">Elektromos Saiyan Aura Aktív</span>
+                </div>
+                
+                <h1 class="font-display font-black text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight">
+                    ÉBRESZD FEL A <br class="hidden md:block">
+                    <span class="bg-gradient-to-r from-dbBlue via-dbYellow to-dbOrange bg-clip-text text-transparent hover:brightness-110 transition-all duration-300">
+                        SAIYAN ERŐT
+                    </span>
+                </h1>
+                
+                <p class="text-slate-300 max-w-xl text-lg md:text-xl font-light leading-relaxed">
+                    Éld át újra a generációkat megihlető legendás kalandot. Gyűjtsd össze a cikázó bio-elektromosságot, fedezd fel a harcosokat, és idézd meg a sárkányt.
+                </p>
+
+                <!-- CTA buttons with auras -->
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <button id="chargeKiBtn" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-dbBlue to-dbOrange hover:brightness-110 text-white font-bold font-display uppercase rounded-xl shadow-[0_0_30px_rgba(21,101,192,0.4)] hover:shadow-[0_0_40px_rgba(245,124,0,0.8)] tracking-wider transition-all duration-300 flex items-center justify-center space-x-3 group relative overflow-hidden">
+                        <span class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shimmer_1s_ease-out]"></span>
+                        <i class="fa-solid fa-bolt-lightning text-white animate-pulse text-lg"></i>
+                        <span>Kezdd el az utazást</span>
+                    </button>
+                    
+                    <a href="#characters" class="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-dbYellow text-slate-200 hover:text-dbYellow font-semibold font-display uppercase rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>Harcosok Felfedezése</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </a>
+                </div>
+                
+                <div class="pt-6 font-mono text-xs text-slate-400 flex items-center justify-center lg:justify-start gap-2">
+                    <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px]">TARTSD LENYOMVA</kbd>
+                    <span>az indítás gombot az elektromos kisülések felkorbácsolásához!</span>
+                </div>
+            </div>
+
+            <!-- Majestic visual element (Hero Orbit / Dragon Ball) -->
+            <div class="lg:col-span-5 flex items-center justify-center relative">
+                <div class="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center">
+                    <!-- Energy aura background rings -->
+                    <div class="absolute inset-0 rounded-full border border-dbBlue/20 animate-spin-slow"></div>
+                    <div class="absolute -inset-4 rounded-full border border-dashed border-dbYellow/10 animate-pulse"></div>
+                    <div class="absolute -inset-10 rounded-full bg-radial-gradient from-dbBlue/10 to-transparent blur-2xl opacity-70"></div>
+                    
+                    <!-- Center floating 4-star Dragon Ball -->
+                    <div class="absolute w-56 h-56 rounded-full bg-gradient-to-br from-[#FF9E40] via-[#F57C00] to-[#E65100] shadow-[0_0_60px_rgba(245,124,0,0.5)] flex items-center justify-center animate-float group cursor-pointer transition-all duration-500 hover:scale-105" onclick="triggerHeroPowerUp(event)">
+                        <div class="absolute inset-1.5 rounded-full border-t border-white/40 bg-gradient-to-b from-white/20 to-transparent"></div>
+                        <div class="absolute inset-1.5 rounded-full bg-gradient-to-br from-transparent to-black/30"></div>
+                        <!-- Four Stars -->
+                        <div class="grid grid-cols-2 gap-3 z-10">
+                            <i class="fa-solid fa-star text-dbYellow text-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] animate-pulse"></i>
+                            <i class="fa-solid fa-star text-dbYellow text-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] animate-pulse"></i>
+                            <i class="fa-solid fa-star text-dbYellow text-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] animate-pulse"></i>
+                            <i class="fa-solid fa-star text-dbYellow text-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] animate-pulse"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legendary Characters Section -->
+    <section id="characters" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="font-display font-black text-4xl md:text-6xl uppercase tracking-wider bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+                    LEGENDÁS HARCOSOK
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-dbBlue via-dbYellow to-dbOrange mx-auto rounded-full"></div>
+                <p class="text-slate-400 max-w-lg mx-auto">
+                    Ismerd meg az univerzum leghatalmasabb harcosait. Húzd az egeret a kártyákra a bio-adatok megtekintéséhez.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Goku Card -->
+                <div class="glass-card rounded-2xl p-6 relative group overflow-hidden flex flex-col justify-between" data-char="goku">
+                    <div class="absolute inset-0 bg-[#F57C00]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="relative space-y-4">
+                        <div class="w-full h-48 rounded-xl bg-gradient-to-b from-[#1565C0]/30 to-[#0A0B10] flex items-center justify-center overflow-hidden border border-white/5 relative">
+                            <div class="absolute inset-0 bg-radial-gradient from-orange-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                            <!-- Stable GitHub Raw image for Goku -->
+                            <img src="https://raw.githubusercontent.com/diegoveloper/flutter-samples/master/images/characters/goku.png" alt="Son Goku" class="h-44 object-contain z-10 transition-transform duration-500 group-hover:scale-110 filter drop-shadow-[0_0_15px_rgba(245,124,0,0.6)]" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-28 h-28 rounded-full border-4 border-dbOrange flex items-center justify-center bg-slate-950 shadow-[0_0_20px_rgba(245,124,0,0.4)]\'><span class=\'font-display font-black text-slate-100 text-5xl\'>悟</span></div>';">
+                        </div>
+
+                        <div class="space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-mono text-dbOrange tracking-widest uppercase">Csillagharcos</span>
+                                <span class="text-xs bg-dbOrange/20 text-dbOrange px-2 py-0.5 rounded-full font-mono">Főszereplő</span>
+                            </div>
+                            <h3 class="font-display font-black text-2xl text-slate-100 tracking-wide">SON GOKU</h3>
+                        </div>
+
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            A Föld legendás védelmezője. Tiszta szívű harcos, aki folyamatosan áttöri a határait, hogy új isteni szinteket érjen el.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/5 space-y-3">
+                        <div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                <span>HARCI ERŐ (ALAP)</span>
+                                <span class="text-dbOrange font-bold">150,000,000</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-dbOrange rounded-full w-[95%] transition-all group-hover:bg-dbYellow shadow-[0_0_8px_rgba(245,124,0,0.6)]"></div>
+                            </div>
+                        </div>
+                        <button onclick="powerUpCharacter('goku', event)" class="w-full py-2.5 bg-white/5 border border-white/10 hover:border-dbOrange text-slate-300 hover:text-dbOrange text-xs font-display font-bold uppercase rounded-lg transition-all tracking-wider">
+                            ENERGIAKISÜLÉS
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Vegeta Card -->
+                <div class="glass-card rounded-2xl p-6 relative group overflow-hidden flex flex-col justify-between" data-char="vegeta">
+                    <div class="absolute inset-0 bg-[#1565C0]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="relative space-y-4">
+                        <div class="w-full h-48 rounded-xl bg-gradient-to-b from-[#F57C00]/30 to-[#0A0B10] flex items-center justify-center overflow-hidden border border-white/5 relative">
+                            <div class="absolute inset-0 bg-radial-gradient from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                            <!-- Stable GitHub Raw image for Vegeta -->
+                            <img src="https://raw.githubusercontent.com/diegoveloper/flutter-samples/master/images/characters/vegeta.png" alt="Vegeta" class="h-44 object-contain z-10 transition-transform duration-500 group-hover:scale-110 filter drop-shadow-[0_0_15px_rgba(21,101,192,0.6)]" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-28 h-28 rounded-full border-4 border-dbBlue flex items-center justify-center bg-slate-950 shadow-[0_0_20px_rgba(21,101,192,0.4)]\'><i class=\'fa-solid fa-crown text-dbBlue text-4xl\'></i></div>';">
+                        </div>
+
+                        <div class="space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-mono text-dbBlue tracking-widest uppercase">Csillagharcos Herceg</span>
+                                <span class="text-xs bg-dbBlue/20 text-dbBlue px-2 py-0.5 rounded-full font-mono">Vetélytárs</span>
+                            </div>
+                            <h3 class="font-display font-black text-2xl text-slate-100 tracking-wide">VEGETA</h3>
+                        </div>
+
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Minden csillagharcos büszke hercege. Megingathatatlan elszántság vezérli a Goku feletti abszolút dominancia elérésére.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/5 space-y-3">
+                        <div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                <span>HARCI ERŐ (ALAP)</span>
+                                <span class="text-dbBlue font-bold">148,000,000</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-dbBlue rounded-full w-[92%] transition-all group-hover:bg-dbOrange shadow-[0_0_8px_rgba(21,101,192,0.6)]"></div>
+                            </div>
+                        </div>
+                        <button onclick="powerUpCharacter('vegeta', event)" class="w-full py-2.5 bg-white/5 border border-white/10 hover:border-dbBlue text-slate-300 hover:text-dbBlue text-xs font-display font-bold uppercase rounded-lg transition-all tracking-wider">
+                            ENERGIAKISÜLÉS
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Gohan Card -->
+                <div class="glass-card rounded-2xl p-6 relative group overflow-hidden flex flex-col justify-between" data-char="gohan">
+                    <div class="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="relative space-y-4">
+                        <div class="w-full h-48 rounded-xl bg-gradient-to-b from-purple-900/30 to-[#0A0B10] flex items-center justify-center overflow-hidden border border-white/5 relative">
+                            <div class="absolute inset-0 bg-radial-gradient from-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                            <!-- Stable GitHub Raw image for Gohan -->
+                            <img src="https://raw.githubusercontent.com/diegoveloper/flutter-samples/master/images/characters/gohan.png" alt="Gohan" class="h-44 object-contain z-10 transition-transform duration-500 group-hover:scale-110 filter drop-shadow-[0_0_15px_rgba(168,85,247,0.6)]" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-28 h-28 rounded-full border-4 border-purple-500 flex items-center justify-center bg-slate-950 shadow-[0_0_20px_rgba(168,85,247,0.4)]\'><i class=\'fa-solid fa-bolt text-purple-400 text-4xl\'></i></div>';">
+                        </div>
+
+                        <div class="space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-mono text-purple-400 tracking-widest uppercase">Fél-Csillagharcos</span>
+                                <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded-full font-mono">Rejtett Erő</span>
+                            </div>
+                            <h3 class="font-display font-black text-2xl text-slate-100 tracking-wide">SON GOHAN</h3>
+                        </div>
+
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Goku legidősebb fia. Végtelen, düh által táplált harci potenciállal rendelkezik, amely felszabadulva mindenki mást felülmúl.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/5 space-y-3">
+                        <div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                <span>HARCI ERŐ (ALAP)</span>
+                                <span class="text-purple-400 font-bold">120,000,000</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-purple-600 rounded-full w-[80%] transition-all group-hover:bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.6)]"></div>
+                            </div>
+                        </div>
+                        <button onclick="powerUpCharacter('gohan', event)" class="w-full py-2.5 bg-white/5 border border-white/10 hover:border-purple-500 text-slate-300 hover:text-purple-400 text-xs font-display font-bold uppercase rounded-lg transition-all tracking-wider">
+                            ENERGIAKISÜLÉS
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Frieza Card -->
+                <div class="glass-card rounded-2xl p-6 relative group overflow-hidden flex flex-col justify-between" data-char="frieza">
+                    <div class="absolute inset-0 bg-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="relative space-y-4">
+                        <div class="w-full h-48 rounded-xl bg-gradient-to-b from-yellow-900/30 to-[#0A0B10] flex items-center justify-center overflow-hidden border border-white/5 relative">
+                            <div class="absolute inset-0 bg-radial-gradient from-yellow-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                            <!-- Stable GitHub Raw image for Frieza -->
+                            <img src="https://raw.githubusercontent.com/diegoveloper/flutter-samples/master/images/characters/frieza.png" alt="Frieza" class="h-44 object-contain z-10 transition-transform duration-500 group-hover:scale-110 filter drop-shadow-[0_0_15px_rgba(234,179,8,0.6)]" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-28 h-28 rounded-full border-4 border-yellow-500 flex items-center justify-center bg-slate-950 shadow-[0_0_20px_rgba(234,179,8,0.4)]\'><i class=\'fa-solid fa-skull text-yellow-500 text-4xl\'></i></div>';">
+                        </div>
+
+                        <div class="space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-mono text-yellow-500 tracking-widest uppercase">Galaktikus Uralkodó</span>
+                                <span class="text-xs bg-yellow-500/20 text-yellow-500 px-2 py-0.5 rounded-full font-mono">Ellenség</span>
+                            </div>
+                            <h3 class="font-display font-black text-2xl text-slate-100 tracking-wide">DERES (FRIEZA)</h3>
+                        </div>
+
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Kegyetlen galaktikus zsarnok. Hatalmas nyers erővel és a csillagharcosok fajának teljes kiirtására irányuló megszállottsággal bír.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/5 space-y-3">
+                        <div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                <span>HARCI ERŐ (ALAP)</span>
+                                <span class="text-yellow-500 font-bold">140,000,000</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-yellow-600 rounded-full w-[88%] transition-all group-hover:bg-yellow-400 shadow-[0_0_8px_rgba(234,179,8,0.6)]"></div>
+                            </div>
+                        </div>
+                        <button onclick="powerUpCharacter('frieza', event)" class="w-full py-2.5 bg-white/5 border border-white/10 hover:border-yellow-500 text-slate-300 hover:text-yellow-400 text-xs font-display font-bold uppercase rounded-lg transition-all tracking-wider">
+                            ENERGIAKISÜLÉS
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transformations Timeline -->
+    <section id="timeline" class="py-24 relative overflow-hidden bg-gradient-to-b from-transparent to-[#0a0b10]/80 z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="font-display font-black text-4xl md:text-5xl uppercase tracking-wider">
+                    FEJLŐDÉSI IDŐVONAL
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-dbBlue to-dbOrange mx-auto rounded-full"></div>
+                <p class="text-slate-400 max-w-lg mx-auto">
+                    Kövesd végig a Csillagharcosok fizikai evolúciójának mérföldköveit. Kattints az egyes fázisokra az elemzéshez.
+                </p>
+            </div>
+
+            <!-- Horizontal Timeline View -->
+            <div class="relative overflow-x-auto pb-8 pt-4 flex gap-6 scrollbar-thin snap-x">
+                
+                <!-- Base -->
+                <button onclick="selectTimelinePhase(0)" class="timeline-node snap-center flex-shrink-0 w-64 glass-card p-6 rounded-2xl text-left hover:scale-105 active:scale-95 transition-all border-l-4 border-l-slate-400 relative">
+                    <div class="absolute top-4 right-4 text-xs font-mono text-slate-500">#1</div>
+                    <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">Alapállapot</span>
+                    <h4 class="font-display font-bold text-lg mt-1 mb-3 text-slate-200">BASE FORM</h4>
+                    <p class="text-xs text-slate-400 line-clamp-2">Standard nyugodt állapot. Lehetővé teszi a maximális állóképességet.</p>
+                    <div class="mt-4 flex items-center justify-between text-[11px] font-mono text-slate-300 bg-black/30 p-2 rounded-lg">
+                        <span>Szorzó:</span>
+                        <span class="font-bold text-slate-400">1x (Alapértelmezett)</span>
+                    </div>
+                </button>
+
+                <!-- Kaioken -->
+                <button onclick="selectTimelinePhase(1)" class="timeline-node snap-center flex-shrink-0 w-64 glass-card p-6 rounded-2xl text-left hover:scale-105 active:scale-95 transition-all border-l-4 border-l-red-500 relative">
+                    <div class="absolute top-4 right-4 text-xs font-mono text-red-500">#2</div>
+                    <span class="text-xs font-mono text-red-400 uppercase tracking-widest">Kai Király Technikája</span>
+                    <h4 class="font-display font-bold text-lg mt-1 mb-3 text-red-400">KAIOKEN</h4>
+                    <p class="text-xs text-slate-400 line-clamp-2">Felerősíti a használó belső ki-energiáját komoly fizikai kockázat mellett.</p>
+                    <div class="mt-4 flex items-center justify-between text-[11px] font-mono text-slate-300 bg-black/30 p-2 rounded-lg">
+                        <span>Szorzó:</span>
+                        <span class="font-bold text-red-400">Akár 20x-os</span>
+                    </div>
+                </button>
+
+                <!-- SSJ -->
+                <button onclick="selectTimelinePhase(2)" class="timeline-node snap-center flex-shrink-0 w-64 glass-card p-6 rounded-2xl text-left hover:scale-105 active:scale-95 transition-all border-l-4 border-l-dbYellow relative">
+                    <div class="absolute top-4 right-4 text-xs font-mono text-dbYellow">#3</div>
+                    <span class="text-xs font-mono text-dbYellow/80 uppercase tracking-widest">Legendás Harag</span>
+                    <h4 class="font-display font-bold text-lg mt-1 mb-3 text-dbYellow">SUPER SAIYAN</h4>
+                    <p class="text-xs text-slate-400 line-clamp-2">A tiszta harag szabadítja fel. Arany haj és arany bio-energia.</p>
+                    <div class="mt-4 flex items-center justify-between text-[11px] font-mono text-slate-300 bg-black/30 p-2 rounded-lg">
+                        <span>Szorzó:</span>
+                        <span class="font-bold text-dbYellow">50x-es Alaperő</span>
+                    </div>
+                </button>
+
+                <!-- SSJ2 -->
+                <button onclick="selectTimelinePhase(3)" class="timeline-node snap-center flex-shrink-0 w-64 glass-card p-6 rounded-2xl text-left hover:scale-105 active:scale-95 transition-all border-l-4 border-l-yellow-600 relative">
+                    <div class="absolute top-4 right-4 text-xs font-mono text-yellow-600">#4</div>
+                    <span class="text-xs font-mono text-yellow-500 uppercase tracking-widest">Felemelkedett</span>
+                    <h4 class="font-display font-bold text-lg mt-1 mb-3 text-yellow-600">SUPER SAIYAN 2</h4>
+                    <p class="text-xs text-slate-400 line-clamp-2">Cikázó elektromos szikrák kísérik az arany színű aurát.</p>
+                    <div class="mt-4 flex items-center justify-between text-[11px] font-mono text-slate-300 bg-black/30 p-2 rounded-lg">
+                        <span>Szorzó:</span>
+                        <span class="font-bold text-yellow-500">100x-os Alaperő</span>
+                    </div>
+                </button>
+
+                <!-- SSJ3 -->
+                <button onclick="selectTimelinePhase(4)" class="timeline-node snap-center flex-shrink-0 w-64 glass-card p-6 rounded-2xl text-left hover:scale-105 active:scale-95 transition-all border-l-4 border-l-dbOrange relative">
+                    <div class="absolute top-4 right-4 text-xs font-mono text-dbOrange">#5</div>
+                    <span class="text-xs font-mono text-dbOrange uppercase tracking-widest">Végső Határáttörés</span>
+                    <h4 class="font-display font-bold text-lg mt-1 mb-3 text-dbOrange">SUPER SAIYAN 3</h4>
+                    <p class="text-xs text-slate-400 line-clamp-2">Extrém hosszú haj. Hatalmas energiafogyasztás, de elsöprő pusztítás.</p>
+                    <div class="mt-4 flex items-center justify-between text-[11px] font-mono text-slate-300 bg-black/30 p-2 rounded-lg">
+                        <span>Szorzó:</span>
+                        <span class="font-bold text-dbOrange">400x-os Alaperő</span>
+                    </div>
+                </button>
+
+                <!-- SSG -->
+                <button onclick="selectTimelinePhase(5)" class="timeline-node snap-center flex-shrink-0 w-64 glass-card p-6 rounded-2xl text-left hover:scale-105 active:scale-95 transition-all border-l-4 border-l-red-400 relative">
+                    <div class="absolute top-4 right-4 text-xs font-mono text-red-400">#6</div>
+                    <span class="text-xs font-mono text-red-300 uppercase tracking-widest">Isteni Aura</span>
+                    <h4 class="font-display font-bold text-lg mt-1 mb-3 text-red-400">SUPER SAIYAN GOD</h4>
+                    <p class="text-xs text-slate-400 line-clamp-2">Különleges isteni rituáléval elérhető forma. Lágy, vörös tűz-aura.</p>
+                    <div class="mt-4 flex items-center justify-between text-[11px] font-mono text-slate-300 bg-black/30 p-2 rounded-lg">
+                        <span>Szorzó:</span>
+                        <span class="font-bold text-red-400">Isteni Szint</span>
+                    </div>
+                </button>
+
+                <!-- SSB -->
+                <button onclick="selectTimelinePhase(6)" class="timeline-node snap-center flex-shrink-0 w-64 glass-card p-6 rounded-2xl text-left hover:scale-105 active:scale-95 transition-all border-l-4 border-l-dbBlue relative">
+                    <div class="absolute top-4 right-4 text-xs font-mono text-dbBlue">#7</div>
+                    <span class="text-xs font-mono text-dbBlue/80 uppercase tracking-widest">Kozmikus Isteni</span>
+                    <h4 class="font-display font-bold text-lg mt-1 mb-3 text-dbBlue">SUPER SAIYAN BLUE</h4>
+                    <p class="text-xs text-slate-400 line-clamp-2">A Super Saiyan God erejének ötvözése a klasszikus Super Saiyan formával.</p>
+                    <div class="mt-4 flex items-center justify-between text-[11px] font-mono text-slate-300 bg-black/30 p-2 rounded-lg">
+                        <span>Szorzó:</span>
+                        <span class="font-bold text-dbBlue">Transzcendens</span>
+                    </div>
+                </button>
+
+                <!-- UI -->
+                <button onclick="selectTimelinePhase(7)" class="timeline-node snap-center flex-shrink-0 w-64 glass-card p-6 rounded-2xl text-left hover:scale-105 active:scale-95 transition-all border-l-4 border-l-slate-300 relative">
+                    <div class="absolute top-4 right-4 text-xs font-mono text-purple-400 animate-pulse">#8</div>
+                    <span class="text-xs font-mono text-purple-400 uppercase tracking-widest">Tökéletes Ösztön</span>
+                    <h4 class="font-display font-bold text-lg mt-1 mb-3 text-slate-100">ULTRA INSTINCT</h4>
+                    <p class="text-xs text-slate-400 line-clamp-2">Abszolút tudatalatti harcreakció. Tökéletes kitérés és fókusz.</p>
+                    <div class="mt-4 flex items-center justify-between text-[11px] font-mono text-slate-300 bg-black/30 p-2 rounded-lg">
+                        <span>Szorzó:</span>
+                        <span class="font-bold text-slate-100">Végtelen</span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Dynamic details panel based on selection -->
+            <div id="timelineDetail" class="mt-12 glass-panel rounded-2xl p-8 relative overflow-hidden transition-all duration-500 border border-white/10 shadow-[0_0_20px_rgba(21,101,192,0.15)]">
+                <!-- Inner visual effects elements -->
+                <div id="detailAura" class="absolute right-0 top-0 w-80 h-full bg-gradient-to-l from-dbBlue/5 to-transparent transition-all pointer-events-none"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
+                    <div class="md:col-span-8 space-y-4">
+                        <span class="text-xs font-mono text-dbBlue uppercase tracking-widest font-semibold" id="detailSub">Fázis Profil</span>
+                        <h3 class="font-display font-black text-3xl md:text-4xl text-slate-100" id="detailTitle">BASE FORM</h3>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed" id="detailDesc">
+                            Son Goku kiinduló, alapvető formája. Csendes, fókuszált és rugalmas. Nem igényel plusz ki-fogyasztást, ezáltal páratlan állóképességet és tiszta gondolkodást biztosít a harc során.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                            <div class="p-3 bg-white/5 rounded-xl border border-white/5">
+                                <span class="block text-xs font-mono text-slate-400">ÁLLÓKÉPESSÉG VESZTESÉG</span>
+                                <span class="font-display font-bold text-emerald-400" id="detailStamina">Elenyésző (Kiváló állóképesség)</span>
+                            </div>
+                            <div class="p-3 bg-white/5 rounded-xl border border-white/5">
+                                <span class="block text-xs font-mono text-slate-400">JELLEMZŐ ALKALMAZÁS</span>
+                                <span class="font-display font-bold text-slate-300" id="detailKeyUsage">Taktikai harc és edzés</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-4 flex flex-col items-center justify-center p-6 bg-black/40 rounded-xl border border-white/5">
+                        <div class="text-center space-y-2">
+                            <span class="text-[11px] font-mono text-slate-400 uppercase tracking-widest block">SAIYAN TELJESÍTMÉNY FAKTOR</span>
+                            <div class="text-4xl md:text-5xl font-display font-black text-dbBlue" id="detailPower">1x</div>
+                            <span class="text-[10px] font-mono text-slate-400 uppercase block" id="detailMultiplierLabel">SZORZÓEGYSÉG</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Saga Showcase Section -->
+    <section id="sagas" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="font-display font-black text-4xl md:text-5xl uppercase tracking-wider">
+                    SAGA BEMUTATÓK
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-dbBlue to-dbOrange mx-auto rounded-full"></div>
+                <p class="text-slate-400 max-w-lg mx-auto">
+                    Utazz végig azokon az ikonikus korszakokon, amelyek megváltoztatták az egész univerzum sorsát.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Saiyan Saga -->
+                <div class="glass-card rounded-2xl p-6 relative group overflow-hidden border border-white/5 flex flex-col justify-between">
+                    <div class="absolute inset-0 bg-gradient-to-br from-dbOrange/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono text-dbOrange uppercase tracking-wider">KORSZAK 01</span>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-900 border border-slate-800 px-2.5 py-1 rounded-full flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-dbOrange animate-pulse"></i> Teljesítve</span>
+                        </div>
+                        <h3 class="font-display font-black text-2xl text-slate-100">SAIYAN SAGA</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Son Goku felfedezi földönkívüli származását. A megmaradt Csillagharcosok megtámadják a Földet, ami kétségbeesett taktikázáshoz és egy epikus sivatagi összecsapáshoz vezet Vegeta és Goku között.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/5 space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                <span>Történet feloldási arány</span>
+                                <span class="text-slate-200">100%</span>
+                            </div>
+                            <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-dbOrange rounded-full w-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-slate-400">Epizódok száma: <strong class="text-slate-200">35</strong></span>
+                            <button onclick="triggerSagaDetails('saiyan')" class="px-4 py-1.5 bg-white/5 hover:bg-dbOrange/20 hover:border-dbOrange border border-white/10 text-slate-300 hover:text-dbOrange font-display text-xs font-bold rounded-lg transition-all uppercase">
+                                Részletek
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frieza Saga -->
+                <div class="glass-card rounded-2xl p-6 relative group overflow-hidden border border-white/5 flex flex-col justify-between">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono text-purple-400 uppercase tracking-wider">KORSZAK 02</span>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-900 border border-slate-800 px-2.5 py-1 rounded-full flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-purple-400 animate-pulse"></i> Teljesítve</span>
+                        </div>
+                        <h3 class="font-display font-black text-2xl text-slate-100">FRIEZA SAGA</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            A Namek bolygóra tett expedíció a helyi különleges sárkánygömbök összegyűjtésére. A hősök szembeszállnak Frieza seregével, ami Goku legelső legendás Super Saiyan átalakulásában csúcsosodik ki.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/5 space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                <span>Történet feloldási arány</span>
+                                <span class="text-slate-200">100%</span>
+                            </div>
+                            <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-purple-500 rounded-full w-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-slate-400">Epizódok száma: <strong class="text-slate-200">72</strong></span>
+                            <button onclick="triggerSagaDetails('frieza')" class="px-4 py-1.5 bg-white/5 hover:bg-purple-500/20 hover:border-purple-500 border border-white/10 text-slate-300 hover:text-purple-400 font-display text-xs font-bold rounded-lg transition-all uppercase">
+                                Részletek
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cell Saga -->
+                <div class="glass-card rounded-2xl p-6 relative group overflow-hidden border border-white/5 flex flex-col justify-between">
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono text-emerald-400 uppercase tracking-wider">KORSZAK 03</span>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-900 border border-slate-800 px-2.5 py-1 rounded-full flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-400 animate-pulse"></i> Teljesítve</span>
+                        </div>
+                        <h3 class="font-display font-black text-2xl text-slate-100">CELL SAGA</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Halálos androidok és egy bio-engineered szintetikus szörnyeteg fenyegetik a Földet. Cell saját harcművészeti tornát hirdet, ahol Gohan eléri a legendás Super Saiyan 2 szintet.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/5 space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                <span>Történet feloldási arány</span>
+                                <span class="text-slate-200">100%</span>
+                            </div>
+                            <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500 rounded-full w-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-slate-400">Epizódok száma: <strong class="text-slate-200">83</strong></span>
+                            <button onclick="triggerSagaDetails('cell')" class="px-4 py-1.5 bg-white/5 hover:bg-emerald-500/20 hover:border-emerald-500 border border-white/10 text-slate-300 hover:text-emerald-400 font-display text-xs font-bold rounded-lg transition-all uppercase">
+                                Részletek
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Majin Buu Saga -->
+                <div class="glass-card rounded-2xl p-6 relative group overflow-hidden border border-white/5 flex flex-col justify-between">
+                    <div class="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono text-pink-400 uppercase tracking-wider">KORSZAK 04</span>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-900 border border-slate-800 px-2.5 py-1 rounded-full flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-pink-400 animate-pulse"></i> Teljesítve</span>
+                        </div>
+                        <h3 class="font-display font-black text-2xl text-slate-100">MAJIN BUU SAGA</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Egy ősi mágus felébreszti a káosz szülöttét, Majin Buu-t. Hőseink fúziós technikákat alkalmaznak, majd az univerzum erejét tömörítve elkészítik a győzedelmes Lélekbombát.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/5 space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                                <span>Történet feloldási arány</span>
+                                <span class="text-slate-200">100%</span>
+                            </div>
+                            <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-pink-500 rounded-full w-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-slate-400">Epizódok száma: <strong class="text-slate-200">101</strong></span>
+                            <button onclick="triggerSagaDetails('buu')" class="px-4 py-1.5 bg-white/5 hover:bg-pink-500/20 hover:border-pink-500 border border-white/10 text-slate-300 hover:text-pink-400 font-display text-xs font-bold rounded-lg transition-all uppercase">
+                                Részletek
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dragon Balls Gathering Section -->
+    <section id="summon" class="py-24 relative overflow-hidden bg-gradient-to-b from-transparent via-slate-950/90 to-transparent z-10">
+        <!-- Giant Dragon Portal Ring -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-dbBlue/10 animate-spin-slow pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            <div class="space-y-4 mb-12">
+                <div class="inline-flex items-center space-x-2 bg-dbYellow/10 border border-dbYellow/20 px-4 py-1 rounded-full">
+                    <i class="fa-solid fa-dragon text-dbYellow animate-pulse"></i>
+                    <span class="text-xs font-mono font-bold tracking-widest text-dbYellow uppercase font-display">Sárkány Oltár</span>
+                </div>
+                <h2 class="font-display font-black text-4xl md:text-5xl uppercase tracking-wider">
+                    IDÉZD MEG SHENRON-T
+                </h2>
+                <p class="text-slate-300 max-w-lg mx-auto">
+                    Kattints a hét misztikus sárkánygömbre a rezonancia aktiválásához. Ha mindegyik gömb ég, a sárkány megjelenik és teljesíti a kívánságod!
+                </p>
+            </div>
+
+            <!-- The Altar of Dragon Balls -->
+            <div class="grid grid-cols-4 md:grid-cols-7 gap-4 md:gap-6 justify-center max-w-4xl mx-auto py-8">
+                <!-- Ball 1 -->
+                <button onclick="activateBall(1)" id="ball-1" class="group flex flex-col items-center justify-center p-3 rounded-2xl glass-card border border-white/5 transition-all duration-300 relative">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-dbOrange/30 to-dbOrange/10 border border-dbOrange/20 flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all relative">
+                        <div class="z-10 flex text-[10px] text-dbYellow/40 transition-colors">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-mono text-slate-400 mt-2">1-CSILLAGOS</span>
+                </button>
+
+                <!-- Ball 2 -->
+                <button onclick="activateBall(2)" id="ball-2" class="group flex flex-col items-center justify-center p-3 rounded-2xl glass-card border border-white/5 transition-all duration-300 relative">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-dbOrange/30 to-dbOrange/10 border border-dbOrange/20 flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all relative">
+                        <div class="z-10 flex gap-0.5 text-[8px] text-dbYellow/40 transition-colors">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-mono text-slate-400 mt-2">2-CSILLAGOS</span>
+                </button>
+
+                <!-- Ball 3 -->
+                <button onclick="activateBall(3)" id="ball-3" class="group flex flex-col items-center justify-center p-3 rounded-2xl glass-card border border-white/5 transition-all duration-300 relative">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-dbOrange/30 to-dbOrange/10 border border-dbOrange/20 flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all relative">
+                        <div class="z-10 flex flex-col items-center text-[7px] text-dbYellow/40 transition-colors">
+                            <div class="flex gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-mono text-slate-400 mt-2">3-CSILLAGOS</span>
+                </button>
+
+                <!-- Ball 4 -->
+                <button onclick="activateBall(4)" id="ball-4" class="group flex flex-col items-center justify-center p-3 rounded-2xl glass-card border border-white/5 transition-all duration-300 relative">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-dbOrange/30 to-dbOrange/10 border border-dbOrange/20 flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all relative">
+                        <div class="z-10 grid grid-cols-2 gap-0.5 text-[7px] text-dbYellow/40 transition-colors">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-mono text-slate-400 mt-2">4-CSILLAGOS</span>
+                </button>
+
+                <!-- Ball 5 -->
+                <button onclick="activateBall(5)" id="ball-5" class="group flex flex-col items-center justify-center p-3 rounded-2xl glass-card border border-white/5 transition-all duration-300 relative">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-dbOrange/30 to-dbOrange/10 border border-dbOrange/20 flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all relative">
+                        <div class="z-10 flex flex-col items-center text-[6px] text-dbYellow/40 transition-colors">
+                            <div class="flex gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <i class="fa-solid fa-star"></i>
+                            <div class="flex gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-mono text-slate-400 mt-2">5-CSILLAGOS</span>
+                </button>
+
+                <!-- Ball 6 -->
+                <button onclick="activateBall(6)" id="ball-6" class="group flex flex-col items-center justify-center p-3 rounded-2xl glass-card border border-white/5 transition-all duration-300 relative">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-dbOrange/30 to-dbOrange/10 border border-dbOrange/20 flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all relative">
+                        <div class="z-10 grid grid-cols-3 gap-0.5 text-[6px] text-dbYellow/40 transition-colors">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-mono text-slate-400 mt-2">6-CSILLAGOS</span>
+                </button>
+
+                <!-- Ball 7 -->
+                <button onclick="activateBall(7)" id="ball-7" class="group flex flex-col items-center justify-center p-3 rounded-2xl glass-card border border-white/5 transition-all duration-300 relative col-span-4 md:col-span-1">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-dbOrange/30 to-dbOrange/10 border border-dbOrange/20 flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all relative mx-auto">
+                        <div class="z-10 flex flex-col items-center text-[5px] text-dbYellow/40 transition-colors">
+                            <div class="flex gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <i class="fa-solid fa-star"></i>
+                            <div class="flex gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-mono text-slate-400 mt-2 block text-center">7-CSILLAGOS</span>
+                </button>
+            </div>
+
+            <div class="mt-8 flex flex-col items-center justify-center">
+                <p id="ballsCountText" class="text-xs font-mono text-slate-400 tracking-wider uppercase">0 / 7 REZONANCIA AKTÍV</p>
+                <div class="w-48 h-1 bg-slate-800 rounded-full overflow-hidden mt-2 relative">
+                    <div id="ballsProgressBar" class="h-full bg-dbBlue w-0 shadow-[0_0_8px_rgba(21,101,192,0.5)] transition-all"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Battle Power Stats Section -->
+    <section class="py-20 relative bg-slate-950/50 z-10 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Stat 1 -->
+            <div class="text-center space-y-2 p-6 glass-card rounded-2xl">
+                <i class="fa-solid fa-user-ninja text-dbBlue text-2xl animate-pulse"></i>
+                <div class="text-3xl md:text-5xl font-display font-black text-slate-100" data-target="400">0</div>
+                <span class="text-xs font-mono text-slate-400 uppercase tracking-widest block">SZEREPLŐK</span>
+            </div>
+            <!-- Stat 2 -->
+            <div class="text-center space-y-2 p-6 glass-card rounded-2xl">
+                <i class="fa-solid fa-arrows-spin text-dbYellow text-2xl"></i>
+                <div class="text-3xl md:text-5xl font-display font-black text-slate-100" data-target="32">0</div>
+                <span class="text-xs font-mono text-slate-400 uppercase tracking-widest block">TRANSZFORMÁCIÓK</span>
+            </div>
+            <!-- Stat 3 -->
+            <div class="text-center space-y-2 p-6 glass-card rounded-2xl">
+                <i class="fa-solid fa-tv text-dbOrange text-2xl"></i>
+                <div class="text-3xl md:text-5xl font-display font-black text-slate-100" data-target="820">0</div>
+                <span class="text-xs font-mono text-slate-400 uppercase tracking-widest block">EPIZÓDOK</span>
+            </div>
+            <!-- Stat 4 -->
+            <div class="text-center space-y-2 p-6 glass-card rounded-2xl">
+                <i class="fa-solid fa-burst text-red-500 text-2xl"></i>
+                <div class="text-3xl md:text-5xl font-display font-black text-slate-100" data-target="150000000">0</div>
+                <span class="text-xs font-mono text-slate-400 uppercase tracking-widest block">MAX KI SZINT</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fan Memories Section -->
+    <section class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="font-display font-black text-4xl md:text-5xl uppercase tracking-wider">
+                    RAJONGÓI EMLÉKEK
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-dbBlue via-dbYellow to-dbOrange mx-auto rounded-full"></div>
+                <p class="text-slate-400 max-w-lg mx-auto">
+                    Nosztalgikus visszaemlékezések az univerzum legrégebbi védelmezőitől, akik végignézték a legendát.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Memory 1 -->
+                <div class="glass-card rounded-2xl p-6 relative flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-1 text-dbYellow">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm italic leading-relaxed">
+                            "Amikor Goku először alakult át Super Saiyanná a Namek bolygón, az örökre megváltoztatta a gyerekkoromat. A düh, a cikázó elektromosság, a szálló arany por - még mindig libabőrös leszek tőle!"
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center space-x-3 pt-4 border-t border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-display font-bold text-dbBlue border border-dbBlue/20">
+                            MK
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-200">Marcus K.</h4>
+                            <span class="text-xs text-slate-400 font-mono">Rajongó 1996 óta</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Memory 2 -->
+                <div class="glass-card rounded-2xl p-6 relative flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-1 text-dbYellow">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm italic leading-relaxed">
+                            "A Father-Son Kamehameha a Cell Saga végén megtanított arra, mit jelent a valódi elszántság és a barátok támogatása. Ez nem csak egy csata volt, hanem egy érzelmi csúcspont."
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center space-x-3 pt-4 border-t border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-display font-bold text-dbOrange border border-dbOrange/20">
+                            SR
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-200">Sarah R.</h4>
+                            <span class="text-xs text-slate-400 font-mono">Rajongó 2002 óta</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Memory 3 -->
+                <div class="glass-card rounded-2xl p-6 relative flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-1 text-dbYellow">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm italic leading-relaxed">
+                            "A Dragon Ball arra tanított, hogy a korlátok azért vannak, hogy átlépjük őket. Amikor az élet nehézzé válik, mindig eszembe jut Goku akaratereje, és megyek tovább."
+                        </p>
+                    </div>
+                    <div class="mt-6 flex items-center space-x-3 pt-4 border-t border-white/5">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-display font-bold text-dbYellow border border-dbYellow/20">
+                            TH
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-200">Tyler H.</h4>
+                            <span class="text-xs text-slate-400 font-mono">Rajongó 1999 óta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 relative z-10 bg-slate-950/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="font-display font-black text-4xl md:text-5xl uppercase tracking-wider">
+                    HARCOSOK ARCKÉPCSARNOKA
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-dbYellow via-dbOrange to-dbBlue mx-auto rounded-full"></div>
+                <p class="text-slate-400 max-w-lg mx-auto">
+                    Különleges és elképesztő digitális energiaminták, melyek a harcosok belső auráját jelképezik.
+                </p>
+            </div>
+
+            <!-- Masonry style visual grids with CSS placeholders/gradients -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="glass-card rounded-2xl p-4 flex flex-col space-y-4 group overflow-hidden relative border border-white/5">
+                    <div class="w-full h-48 bg-gradient-to-r from-[#FF9E40] to-dbOrange rounded-xl flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/40 opacity-50 group-hover:opacity-0 transition-opacity"></div>
+                        <i class="fa-solid fa-fire text-white text-5xl group-hover:scale-125 transition-transform duration-500"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-bold text-slate-200">Arany Saiyan Aura</h4>
+                        <p class="text-xs text-slate-400 font-mono mt-1">Super Saiyan Ki Manifestáció</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="glass-card rounded-2xl p-4 flex flex-col space-y-4 group overflow-hidden relative border border-white/5">
+                    <div class="w-full h-48 bg-gradient-to-r from-dbBlue to-purple-800 rounded-xl flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/40 opacity-50 group-hover:opacity-0 transition-opacity"></div>
+                        <i class="fa-solid fa-bolt-lightning text-white text-5xl group-hover:scale-125 transition-transform duration-500"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-bold text-slate-200">Final Flash Energia</h4>
+                        <p class="text-xs text-slate-400 font-mono mt-1">A Csillagharcos Herceg Villámai</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="glass-card rounded-2xl p-4 flex flex-col space-y-4 group overflow-hidden relative border border-white/5">
+                    <div class="w-full h-48 bg-gradient-to-r from-purple-700 to-pink-600 rounded-xl flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/40 opacity-50 group-hover:opacity-0 transition-opacity"></div>
+                        <i class="fa-solid fa-atom text-white text-5xl group-hover:scale-125 transition-transform duration-500"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-bold text-slate-200">Dimenziós Repedés</h4>
+                        <p class="text-xs text-slate-400 font-mono mt-1">Majin Káoszenergia Blueprint</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-24 relative overflow-hidden z-10 border-t border-white/5">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#07080c] via-dbBlue/5 to-[#07080c] pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 space-y-8">
+            <h2 class="font-display font-black text-4xl md:text-6xl text-slate-100 uppercase tracking-wider leading-[1.1]">
+                A KALANDOD <br>
+                <span class="bg-gradient-to-r from-dbBlue to-dbOrange bg-clip-text text-transparent">ÚJRA KEZDŐDIK</span>
+            </h2>
+            <p class="text-slate-300 max-w-lg mx-auto text-sm md:text-base leading-relaxed">
+                Csatlakozz még ma a Csillagharcosok nemzetközi közösségéhez. Turbózd fel az energiádat, idézd meg a túlvilági lényeket, és lépd át az összes határodat.
+            </p>
+            <div class="pt-4">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-8 py-4 bg-gradient-to-r from-dbBlue to-dbOrange hover:from-dbOrange hover:to-dbBlue text-slate-50 font-bold font-display uppercase rounded-xl shadow-[0_0_20px_rgba(21,101,192,0.4)] hover:shadow-[0_0_30px_rgba(245,124,0,0.7)] tracking-wider transition-all duration-300">
+                    Csatlakozás a Kalandhoz
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Majestic Shenron Summon Overlay (Interactive Modal) -->
+    <div id="summonModal" class="fixed inset-0 z-50 bg-[#05060bde] backdrop-blur-md flex items-center justify-center p-6 hidden opacity-0 transition-opacity duration-700">
+        <div class="glass-panel-heavy rounded-3xl p-8 max-w-lg w-full text-center relative border border-dbYellow/30 shadow-[0_0_50px_rgba(255,213,79,0.25)]">
+            <!-- Close Button -->
+            <button onclick="closeSummonModal()" class="absolute top-4 right-4 text-slate-400 hover:text-dbOrange transition-all w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Shenron Illustration & Glow -->
+            <div class="relative w-48 h-48 mx-auto mb-6 flex items-center justify-center">
+                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/10 to-dbYellow/20 filter blur-xl animate-pulse"></div>
+                <div class="w-36 h-36 rounded-full border-2 border-emerald-500/40 flex items-center justify-center bg-black/40 shadow-[0_0_30px_rgba(16,185,129,0.3)]">
+                    <i class="fa-solid fa-dragon text-emerald-500 text-6xl transform animate-float"></i>
+                </div>
+            </div>
+
+            <span class="text-xs font-mono text-emerald-400 tracking-widest uppercase block mb-1">Mennyei Entitás Ébren Van</span>
+            <h3 class="font-display font-black text-2xl md:text-3xl text-dbYellow uppercase tracking-wider mb-3">SHENRON MEGJELENT</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                "Én vagyok az Örök Sárkány. Egyetlen kívánságodat teljesítem. Szólj, mi az óhajod..."
+            </p>
+
+            <!-- Dynamic wish choosing mechanics -->
+            <div class="space-y-3 mb-6 text-left">
+                <button onclick="declareWish('immortality')" class="w-full p-3 bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500 rounded-xl transition-all text-xs font-mono flex items-center justify-between text-slate-300 hover:text-white">
+                    <span>1. HALHATATLANSÁG AKKUMULÁCIÓ</span>
+                    <i class="fa-solid fa-droplet text-emerald-400 text-[10px]"></i>
+                </button>
+                <button onclick="declareWish('power')" class="w-full p-3 bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500 rounded-xl transition-all text-xs font-mono flex items-center justify-between text-slate-300 hover:text-white">
+                    <span>2. MAXIMÁLIS KI-KAPACITÁS FELSZABADÍTÁS</span>
+                    <i class="fa-solid fa-bolt text-dbYellow text-[10px]"></i>
+                </button>
+                <button onclick="declareWish('peace')" class="w-full p-3 bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500 rounded-xl transition-all text-xs font-mono flex items-center justify-between text-slate-300 hover:text-white">
+                    <span>3. UNIVERZÁLIS BÉKE ÉS REND REGENERÁLÁS</span>
+                    <i class="fa-solid fa-heart text-pink-400 text-[10px]"></i>
+                </button>
+            </div>
+
+            <p id="wishResult" class="hidden text-xs font-mono text-emerald-400 animate-pulse bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20 text-center"></p>
+        </div>
+    </div>
+
+    <!-- Generic Saga detail overlay -->
+    <div id="sagaModal" class="fixed inset-0 z-50 bg-[#05060bde] backdrop-blur-md flex items-center justify-center p-6 hidden opacity-0 transition-opacity duration-300">
+        <div class="glass-panel-heavy rounded-3xl p-8 max-w-md w-full relative border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+            <button onclick="closeSagaModal()" class="absolute top-4 right-4 text-slate-400 hover:text-dbOrange transition-all w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 id="sagaModalTitle" class="font-display font-black text-2xl text-slate-100 mb-2">SAGA DOSSZIÉ</h3>
+            <p id="sagaModalSubtitle" class="text-xs font-mono text-dbOrange uppercase tracking-wider mb-4">Saga részletek</p>
+            <p id="sagaModalDesc" class="text-sm text-slate-300 leading-relaxed mb-6"></p>
+            <button onclick="closeSagaModal()" class="w-full py-3 bg-white/5 border border-white/10 hover:border-dbOrange text-slate-200 hover:text-dbOrange font-display text-sm font-bold uppercase rounded-xl transition-all">
+                Bezárás
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#050609] pt-16 pb-8 border-t border-white/5 relative z-10 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div class="space-y-4">
+                <a href="#" class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-dbBlue to-dbOrange flex items-center justify-center shadow-[0_0_10px_rgba(21,101,192,0.4)]">
+                        <span class="font-display font-black text-slate-100 text-sm">DB</span>
+                    </div>
+                    <span class="font-display tracking-widest text-sm font-black text-slate-200">SAIYAN<span class="text-dbOrange">SPIRIT</span></span>
+                </a>
+                <p class="leading-relaxed">
+                    A Dragon Ball dicső örökségét a legmodernebb webes dizájnba ültetve élvezheted. Ébreszd fel a belső erődet!
+                </p>
+            </div>
+            
+            <div class="space-y-3">
+                <h4 class="font-display font-bold text-slate-200 tracking-wider">NAVIGÁCIÓ</h4>
+                <ul class="space-y-2 font-mono">
+                    <li><a href="#hero" class="hover:text-dbOrange transition-colors">Oltár</a></li>
+                    <li><a href="#characters" class="hover:text-dbOrange transition-colors">Elit Harcosok</a></li>
+                    <li><a href="#timeline" class="hover:text-dbOrange transition-colors">Evolúció</a></li>
+                    <li><a href="#summon" class="hover:text-dbOrange transition-colors">Sárkány Oltár</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-3">
+                <h4 class="font-display font-bold text-slate-200 tracking-wider">JOGI NYILATKOZAT</h4>
+                <ul class="space-y-2 font-mono">
+                    <li><a href="#" class="hover:text-dbOrange transition-colors">Szerződési Feltételek</a></li>
+                    <li><a href="#" class="hover:text-dbOrange transition-colors">Adatvédelmi Elvek</a></li>
+                    <li><a href="#" class="hover:text-dbOrange transition-colors">Csillagharcos Kódex</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-3">
+                <h4 class="font-display font-bold text-slate-200 tracking-wider">KAPCSOLÓDJ</h4>
+                <div class="flex items-center space-x-3 text-lg">
+                    <a href="#" class="hover:text-dbOrange transition-all" title="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-dbOrange transition-all" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-dbOrange transition-all" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <button onclick="triggerFooterEasterEgg()" class="hover:text-dbYellow transition-all" title="Elektromos kisülés indítása"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+                </div>
+                <p id="easterEggMessage" class="hidden text-[10px] font-mono text-dbOrange animate-pulse transition-all mt-2">Hirtelen feszültségnövekedés a bolygó magjában!</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] font-mono text-slate-500">
+            <p>&copy; 2026 Saiyan Spirit Portal. Akira Toriyama legendás munkássága előtt tisztelegve.</p>
+            <p class="mt-2 md:mt-0">DBZ rajongóknak tervezve világszerte.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* Interactive light follow logic for radial lighting effect */
+        document.body.addEventListener('mousemove', e => {
+            document.body.style.setProperty('--x', `${e.clientX}px`);
+            document.body.style.setProperty('--y', `${e.clientY}px`);
+            
+            // Custom cursor follow
+            const glow = document.getElementById('cursorGlow');
+            if (glow) {
+                glow.style.left = `${e.clientX}px`;
+                glow.style.top = `${e.clientY}px`;
+            }
+        });
+
+        document.body.addEventListener('mousedown', () => {
+            const glow = document.getElementById('cursorGlow');
+            if (glow) glow.classList.add('custom-cursor-click');
+        });
+
+        document.body.addEventListener('mouseup', () => {
+            const glow = document.getElementById('cursorGlow');
+            if (glow) glow.classList.remove('custom-cursor-click');
+        });
+
+        /* Loading Screen Progress Engine */
+        let progress = 0;
+        const loaderPercent = document.getElementById('loader-percent');
+        const loaderBar = document.getElementById('loader-bar');
+        const enterBtn = document.getElementById('enter-btn');
+        const loader = document.getElementById('loader');
+
+        const loadInterval = setInterval(() => {
+            progress += Math.floor(Math.random() * 12) + 6;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(loadInterval);
+                loaderPercent.innerText = "FESZÜLTSÉG MAXIMÁLIS: 9000 V FELETT!";
+                loaderBar.style.width = "100%";
+                enterBtn.classList.remove('hidden');
+                setTimeout(() => {
+                    enterBtn.style.opacity = "1";
+                    enterBtn.style.transform = "scale(1)";
+                }, 50);
+            } else {
+                loaderPercent.innerText = `FESZÜLTSÉG: ${progress}%`;
+                loaderBar.style.width = `${progress}%`;
+            }
+        }, 70);
+
+        enterBtn.addEventListener('click', () => {
+            loader.style.opacity = "0";
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 700);
+        });
+
+        /* ELECTRICITY & LIGHTNING ANIMATION ENGINE (HTML5 CANVAS) */
+        const canvas = document.getElementById('kiCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let lightningArcs = [];
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let isMouseDown = false;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        window.addEventListener('mousedown', () => { isMouseDown = true; });
+        window.addEventListener('mouseup', () => { isMouseDown = false; });
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Helper function to draw a zig-zag electrical line
+        function drawLightningSegment(ctx, startX, startY, endX, endY, displacement, color, width) {
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            
+            const dx = endX - startX;
+            const dy = endY - startY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Segment quantity depends on distance
+            const segments = Math.max(3, Math.floor(distance / 25));
+            
+            let currX = startX;
+            let currY = startY;
+            
+            for (let i = 1; i < segments; i++) {
+                const ratio = i / segments;
+                // Linear target
+                const targetX = startX + dx * ratio;
+                const targetY = startY + dy * ratio;
+                
+                // Add perpendicular random displacement
+                const normalX = -dy / distance;
+                const normalY = dx / distance;
+                const disp = (Math.random() - 0.5) * displacement * (1 - Math.abs(ratio - 0.5) * 0.5);
+                
+                const segmentX = targetX + normalX * disp;
+                const segmentY = targetY + normalY * disp;
+                
+                ctx.lineTo(segmentX, segmentY);
+                currX = segmentX;
+                currY = segmentY;
+            }
+            
+            ctx.lineTo(endX, endY);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = color;
+            ctx.stroke();
+        }
+
+        class ElectricalArc {
+            constructor(startX, startY, isAmbient = false) {
+                this.startX = startX;
+                this.startY = startY;
+                this.isAmbient = isAmbient;
+                this.reset();
+            }
+            
+            reset() {
+                this.life = Math.floor(Math.random() * 12) + 4; // short flicker
+                this.maxLife = this.life;
+                this.color = Math.random() > 0.45 ? 'rgba(66, 165, 245, 0.9)' : 'rgba(255, 213, 79, 0.9)'; // Blue/Yellow lightning
+                this.width = Math.random() * 2 + 0.8;
+                this.displacement = Math.random() * 30 + 15;
+                
+                if (this.isAmbient) {
+                    this.startX = Math.random() * canvas.width;
+                    this.startY = Math.random() * canvas.height;
+                    this.endX = this.startX + (Math.random() * 180 - 90);
+                    this.endY = this.startY + (Math.random() * 180 - 90);
+                } else {
+                    // Gather near mouse
+                    this.endX = mouseX + (Math.random() * 240 - 120);
+                    this.endY = mouseY + (Math.random() * 240 - 120);
+                }
+            }
+            
+            update() {
+                this.life--;
+                if (this.life <= 0) {
+                    this.reset();
+                }
+            }
+            
+            draw() {
+                ctx.save();
+                // Simulating crackle / flickering by opacity changes
+                ctx.globalAlpha = Math.sin((this.life / this.maxLife) * Math.PI) * (Math.random() * 0.4 + 0.6);
+                drawLightningSegment(ctx, this.startX, this.startY, this.endX, this.endY, this.displacement, this.color, this.width);
+                ctx.restore();
+            }
+        }
+
+        // Click-triggered shockwave blast lightning
+        class ShockwaveLightning {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.life = 20;
+                this.maxLife = 20;
+                this.branches = [];
+                this.initBranches();
+            }
+            
+            initBranches() {
+                const count = Math.floor(Math.random() * 5) + 6;
+                for (let i = 0; i < count; i++) {
+                    const angle = (i / count) * Math.PI * 2 + (Math.random() * 0.4 - 0.2);
+                    const distance = Math.random() * 180 + 100;
+                    this.branches.push({
+                        endX: this.x + Math.cos(angle) * distance,
+                        endY: this.y + Math.sin(angle) * distance,
+                        color: Math.random() > 0.5 ? '#FFD54F' : '#42A5F5',
+                        width: Math.random() * 3 + 1.5
+                    });
+                }
+            }
+            
+            update() {
+                this.life--;
+            }
+            
+            draw() {
+                if (this.life <= 0) return;
+                ctx.save();
+                ctx.globalAlpha = (this.life / this.maxLife);
+                this.branches.forEach(b => {
+                    drawLightningSegment(ctx, this.x, this.y, b.endX, b.endY, 40, b.color, b.width);
+                });
+                ctx.restore();
+            }
+        }
+
+        // Build Electrical System pools
+        let ambientArcs = [];
+        let interactiveSparks = [];
+        let shockwaveStrikes = [];
+
+        // Spawn ambient lightning across screen
+        for (let i = 0; i < 15; i++) {
+            ambientArcs.push(new ElectricalArc(0, 0, true));
+        }
+
+        // Trigger electric explosion on click
+        window.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A' || e.target.closest('button') || e.target.closest('nav')) return;
+            
+            shockwaveStrikes.push(new ShockwaveLightning(e.clientX, e.clientY));
+            
+            // Screen shake effect on clicks
+            document.body.classList.add('shake-active');
+            setTimeout(() => {
+                document.body.classList.remove('shake-active');
+            }, 250);
+        });
+
+        // Animation Loop
+        function animateLightning() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw & Update ambient arcs
+            ambientArcs.forEach(arc => {
+                arc.update();
+                arc.draw();
+            });
+
+            // Draw & Update mouse interactive arcs if user drags or hovers
+            if (interactiveSparks.length < 8) {
+                interactiveSparks.push(new ElectricalArc(mouseX, mouseY, false));
+            }
+            interactiveSparks.forEach((sp, idx) => {
+                sp.startX = mouseX;
+                sp.startY = mouseY;
+                sp.update();
+                sp.draw();
+            });
+
+            // Draw shockwave explosion strikes
+            shockwaveStrikes = shockwaveStrikes.filter(sw => sw.life > 0);
+            shockwaveStrikes.forEach(sw => {
+                sw.update();
+                sw.draw();
+            });
+
+            // If user is holding mouse down, create massive electrical accumulation
+            if (isMouseDown) {
+                ctx.save();
+                for (let i = 0; i < 3; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const r = Math.random() * 100 + 40;
+                    drawLightningSegment(
+                        ctx, 
+                        mouseX, 
+                        mouseY, 
+                        mouseX + Math.cos(angle) * r, 
+                        mouseY + Math.sin(angle) * r, 
+                        25, 
+                        '#FFF59D', 
+                        Math.random() * 2 + 1
+                    );
+                }
+                ctx.restore();
+            }
+
+            requestAnimationFrame(animateLightning);
+        }
+        animateLightning();
+
+        /* Ki scroll indicator bar update */
+        const scrollMeter = document.getElementById('scrollMeter');
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const percentage = (window.scrollY / windowHeight) * 100;
+            scrollMeter.style.width = `${percentage}%`;
+        });
+
+        /* Charge Ki Button Screen Shake feedback */
+        const chargeKiBtn = document.getElementById('chargeKiBtn');
+
+        chargeKiBtn.addEventListener('mousedown', (e) => {
+            document.body.classList.add('shake-active');
+            // Shoot multiple intensive lightning bolts
+            for (let i = 0; i < 4; i++) {
+                shockwaveStrikes.push(new ShockwaveLightning(window.innerWidth / 2, window.innerHeight / 2));
+            }
+        });
+
+        chargeKiBtn.addEventListener('mouseup', () => {
+            document.body.classList.remove('shake-active');
+        });
+        chargeKiBtn.addEventListener('mouseleave', () => {
+            document.body.classList.remove('shake-active');
+        });
+
+        chargeKiBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            document.body.classList.add('shake-active');
+        });
+        chargeKiBtn.addEventListener('touchend', () => {
+            document.body.classList.remove('shake-active');
+        });
+
+        function triggerHeroPowerUp(event) {
+            document.body.classList.add('shake-active');
+            shockwaveStrikes.push(new ShockwaveLightning(event.clientX, event.clientY));
+            setTimeout(() => {
+                document.body.classList.remove('shake-active');
+            }, 600);
+        }
+
+        /* Characters interactive Power Burst visual feedback */
+        function powerUpCharacter(charId, event) {
+            document.body.classList.add('shake-active');
+            shockwaveStrikes.push(new ShockwaveLightning(event.clientX, event.clientY));
+            
+            // Generate visual spark aura around card
+            const card = document.querySelector(`[data-char="${charId}"]`);
+            if (card) {
+                card.classList.add('aura-pulse');
+                setTimeout(() => {
+                    card.classList.remove('aura-pulse');
+                }, 1500);
+            }
+
+            setTimeout(() => {
+                document.body.classList.remove('shake-active');
+            }, 500);
+        }
+
+        /* Timeline database details */
+        const timelineDatabase = [
+            {
+                title: "BASE FORM",
+                sub: "KIINDULÓ FÁZIS / DISZCIPLINÁLT",
+                desc: "A Csillagharcosok alapvető állapota. Fizikai harcművészet, energiatakarékos működés és kiváló alkalmazkodóképesség jellemzi. Ez az alapvető szellem-test egyensúly megtestesítője.",
+                stamina: "Elenyésző (Kiváló állóképesség)",
+                usage: "Hosszú idejű harc és fókuszált tréning",
+                power: "1x Szorzó",
+                color: "rgba(245, 124, 0, 0.05)"
+            },
+            {
+                title: "KAIOKEN",
+                sub: "KAI KIRÁLY FAJTA / EXTRÉM FESZÜLTSÉG",
+                desc: "Kai Király által kifejlesztett technika, ami azonnal megtöbbszörözi a harci potenciált. Azonban a túl magas szorzók szó szerint roncsolhatják a használó izomzatát a hirtelen fellépő fizikai megterhelés miatt.",
+                stamina: "Kritikus (Túlterheli a szervezetet)",
+                usage: "Gyors, meglepetésszerű támadások és kitörések",
+                power: "20x-os Szorzó",
+                color: "rgba(239, 68, 68, 0.08)"
+            },
+            {
+                title: "SUPER SAIYAN",
+                sub: "DÜH FELSZABADÍTÁSA / A LEGENDA",
+                desc: "Akkor valósul meg, amikor egy tiszta szívű Csillagharcos kontrolálatlan dühöt tapasztal. Jellemzője az arany színben izzó haj és az erőteljes arany színű aura.",
+                stamina: "Közepes (Folyamatos ki-áramlás)",
+                usage: "Galaktikus szintű ellenségek legyőzése",
+                power: "50x-es Alaperő",
+                color: "rgba(255, 213, 79, 0.08)"
+            },
+            {
+                title: "SUPER SAIYAN 2",
+                sub: "FELEMELKEDETT / CIKÁZÓ ELEKTROMOSSÁG",
+                desc: "A Super Saiyan szint továbbfejlesztett állapota. Elsőként Son Gohan mutatta be Cell ellen. A haj még élesebb vonalúvá válik, az aurát pedig folyamatos cikázó bio-elektromos villámok kísérik.",
+                stamina: "Közepes-Magas (Fokozott koncentráció)",
+                usage: "Tökéletesített bio-szörnyek megsemmisítése",
+                power: "100x-os Alaperő",
+                color: "rgba(202, 138, 4, 0.08)"
+            },
+            {
+                title: "SUPER SAIYAN 3",
+                sub: "HATÁRÁTTÖRÉS / MAXIMÁLIS KI-TÖMÖRÍTÉS",
+                desc: "Ez a fázis gigantikus mennyiségű energiát használ el a haj meghosszabbításához. Rendkívüli erőt biztosít, de a gyors kifáradás miatt csak nagyon rövid ideig tartható fenn.",
+                stamina: "Extrém magas (Nagyon rövid időablak)",
+                usage: "Végső fegyver bolygóméretű fenyegetések ellen",
+                power: "400x-os Alaperő",
+                color: "rgba(245, 124, 0, 0.1)"
+            },
+            {
+                title: "SUPER SAIYAN GOD",
+                sub: "ISTENI NYUGALOM / VÖRÖS KOZMIKUS ENERGIA",
+                desc: "Öt tiszta szívű Csillagharcos összefogásával vagy isteni edzéssel elérhető fázis. A használó haja vöröses árnyalatot vesz fel, energiája pedig isteni frekvenciára vált.",
+                stamina: "Kitűnő (Nagyon tiszta energiaátalakítás)",
+                usage: "Beerus, a Pusztítás Istene elleni küzdelem",
+                power: "Isteni Szint",
+                color: "rgba(239, 68, 68, 0.08)"
+            },
+            {
+                title: "SUPER SAIYAN BLUE",
+                sub: "SUPER SAIYAN GOD SUPER SAIYAN",
+                desc: "A Super Saiyan God erő megnyilvánulása a hagyományos Super Saiyan formába ágyazva. Gyönyörű, kékesen lobogó kozmikus aura övezi, ami precíz energiaszabályozást tesz lehetővé.",
+                stamina: "Szigorú mentális fegyelmet igényel",
+                usage: "Univerzumok közötti túlélési tornák",
+                power: "Transzcendens Szint",
+                color: "rgba(21, 101, 192, 0.1)"
+            },
+            {
+                title: "ULTRA INSTINCT",
+                sub: "ABSZOLÚT TUDATALATTI REAKCIÓ",
+                desc: "A fizikai test irányításának legfelsőbb foka, ahol az idegrendszer önállóan cselekszik anélkül, hogy agyi döntésekre várna. Ezüstös haj és abszolút védekező kitérési képesség övezi.",
+                stamina: "Komoly fizikai visszacsapás a használat után",
+                usage: "Az univerzum puszta létének megóvása",
+                power: "Tökéletes Ösztön",
+                color: "rgba(241, 245, 249, 0.1)"
+            }
+        ];
+
+        function selectTimelinePhase(index) {
+            const data = timelineDatabase[index];
+            if (!data) return;
+
+            // Animate transition on details wrapper
+            const wrapper = document.getElementById('timelineDetail');
+            wrapper.style.transform = "scale(0.98)";
+            wrapper.style.opacity = "0.7";
+
+            setTimeout(() => {
+                document.getElementById('detailTitle').innerText = data.title;
+                document.getElementById('detailSub').innerText = data.sub;
+                document.getElementById('detailDesc').innerText = data.desc;
+                document.getElementById('detailStamina').innerText = data.stamina;
+                document.getElementById('detailKeyUsage').innerText = data.usage;
+                document.getElementById('detailPower').innerText = data.power;
+                document.getElementById('detailAura').style.background = `linear-gradient(270deg, ${data.color} 0%, transparent 100%)`;
+                
+                wrapper.style.transform = "scale(1)";
+                wrapper.style.opacity = "1";
+            }, 250);
+        }
+
+        /* Saga Dossier Modal trigger logic */
+        const sagaDatabase = {
+            saiyan: {
+                title: "SAIYAN SAGA DOSSZIÉ",
+                subtitle: "AZ ELSŐ KOZMIKUS ÖSSZECSAPÁS",
+                desc: "A fenyegetés Raditz érkezésével indul, aki leleplezi Goku földönkívüli örökségét. Goku az életét áldozza, hogy legyőzze őt, majd a másvilágon Kai Királynál edz. Ezalatt a Föld harcosai felkészülnek Vegeta herceg inváziójára, ami egy sorsdöntő és megalkuvást nem tűrő harcművészeti csatában teljesedik ki."
+            },
+            frieza: {
+                title: "FRIEZA INVASION JELENTÉS",
+                subtitle: "A NAMEK BOLYGÓ UTOLSÓ NAPJAI",
+                desc: "A Namek bolygón játszódó történetben Krillin és Gohan a helyi sárkánygömbök felkutatására indulnak. Összecsapnak a galaktikus zsarnok Frieza hadseregével. Goku megérkezése után eléri a legendás Super Saiyan szintet Krillin halálát követően, legyőzve Frieza-t a megsemmisülő bolygón."
+            },
+            cell: {
+                title: "CELL TECHNOLÓGIAI ARCHÍVUM",
+                subtitle: "JÖVŐBELI GYILKOS ANDROIDOK",
+                desc: "Trunks érkezése a jövőből figyelmezteti a hősöket a Dr. Gero által fejlesztett androidok pusztítására. Cell, a szintetikus bio-fegyver elnyeli a 17-es és 18-as androidokat, majd életre hívja a Cell Játékokat. Gohan dühéből megszületik a Super Saiyan 2 szint, megsemmisítve Cell-t az apa-fiú Kamehameha sugárral."
+            },
+            buu: {
+                title: "MAJIN BUU KÁOSZ PROFIL",
+                subtitle: "A KORLÁTLAN PUSZTÍTÁS",
+                desc: "Babidi, a gonosz varázsló feléleszti Majin Buu-t, a gyermeki, de horrorisztikus erejű entitást. Goku bemutatja a Super Saiyan 3 szintet, miközben a harcosok fúziókat alkalmaznak (Vegito, Gotenks). A küzdelem a túlvilágon dől el az univerzum lakóinak összefogásából gyúrt Spirit Bombbal."
+            }
+        };
+
+        const sagaModal = document.getElementById('sagaModal');
+        function triggerSagaDetails(sagaKey) {
+            const data = sagaDatabase[sagaKey];
+            if (!data) return;
+
+            document.getElementById('sagaModalTitle').innerText = data.title;
+            document.getElementById('sagaModalSubtitle').innerText = data.subtitle;
+            document.getElementById('sagaModalDesc').innerText = data.desc;
+
+            sagaModal.classList.remove('hidden');
+            setTimeout(() => {
+                sagaModal.style.opacity = "1";
+            }, 50);
+        }
+
+        function closeSagaModal() {
+            sagaModal.style.opacity = "0";
+            setTimeout(() => {
+                sagaModal.classList.add('hidden');
+            }, 300);
+        }
+
+        /* Dragon Balls activation logic */
+        let activeBalls = new Set();
+        const totalBallsCount = 7;
+        const ballsProgressBar = document.getElementById('ballsProgressBar');
+        const ballsCountText = document.getElementById('ballsCountText');
+        const summonModal = document.getElementById('summonModal');
+
+        function activateBall(number) {
+            const ballButton = document.getElementById(`ball-${number}`);
+            
+            if (activeBalls.has(number)) {
+                activeBalls.delete(number);
+                ballButton.classList.remove('border-dbYellow', 'shadow-[0_0_20px_rgba(255,213,79,0.5)]');
+                ballButton.querySelector('.w-16').classList.replace('from-dbOrange', 'from-dbOrange/30');
+                ballButton.querySelector('.z-10').classList.replace('text-dbYellow', 'text-dbYellow/40');
+            } else {
+                activeBalls.add(number);
+                ballButton.classList.add('border-dbYellow', 'shadow-[0_0_20px_rgba(255,213,79,0.5)]');
+                ballButton.querySelector('.w-16').classList.replace('from-dbOrange/30', 'from-dbOrange');
+                ballButton.querySelector('.z-10').classList.replace('text-dbYellow/40', 'text-dbYellow');
+            }
+
+            const activatedCount = activeBalls.size;
+            const progressPercent = (activatedCount / totalBallsCount) * 100;
+            ballsProgressBar.style.width = `${progressPercent}%`;
+            ballsCountText.innerText = `${activatedCount} / 7 REZONANCIA AKTÍV`;
+
+            if (activatedCount === 7) {
+                setTimeout(summonShenronSequence, 600);
+            }
+        }
+
+        function summonShenronSequence() {
+            document.body.classList.add('shake-active');
+            
+            // Giant lightning strike
+            for (let i = 0; i < 8; i++) {
+                shockwaveStrikes.push(new ShockwaveLightning(Math.random() * window.innerWidth, Math.random() * window.innerHeight));
+            }
+
+            // Generate full screen flash effect
+            const flash = document.createElement('div');
+            flash.className = "fixed inset-0 z-[100] bg-white transition-opacity duration-1000 opacity-100 pointer-events-none";
+            document.body.appendChild(flash);
+
+            setTimeout(() => {
+                flash.style.opacity = "0";
+                document.body.classList.remove('shake-active');
+            }, 1000);
+
+            setTimeout(() => {
+                flash.remove();
+                summonModal.classList.remove('hidden');
+                setTimeout(() => {
+                    summonModal.style.opacity = "1";
+                }, 100);
+            }, 1200);
+        }
+
+        function closeSummonModal() {
+            summonModal.style.opacity = "0";
+            setTimeout(() => {
+                summonModal.classList.add('hidden');
+                document.getElementById('wishResult').classList.add('hidden');
+                // Deactivate all balls to reset game
+                for (let i = 1; i <= 7; i++) {
+                    const ballButton = document.getElementById(`ball-${i}`);
+                    ballButton.classList.remove('border-dbYellow', 'shadow-[0_0_20px_rgba(255,213,79,0.5)]');
+                    ballButton.querySelector('.w-16').classList.replace('from-dbOrange', 'from-dbOrange/30');
+                    ballButton.querySelector('.z-10').classList.replace('text-dbYellow', 'text-dbYellow/40');
+                }
+                activeBalls.clear();
+                ballsProgressBar.style.width = "0%";
+                ballsCountText.innerText = "0 / 7 REZONANCIA AKTÍV";
+            }, 700);
+        }
+
+        function declareWish(type) {
+            const rText = document.getElementById('wishResult');
+            rText.classList.remove('hidden');
+
+            if (type === 'immortality') {
+                rText.innerText = "KÍVÁNSÁGOD TELJESÜLT. AZ ISTENI CSIILLAGHARCOS SEJTGENERÁCIÓ ELINDULT!";
+            } else if (type === 'power') {
+                rText.innerText = "KÍVÁNSÁGOD TELJESÜLT. A KI-KAPACITÁS HATÁRAI ÖRÖKRE MEGSZŰNTEK!";
+            } else {
+                rText.innerText = "KÍVÁNSÁGOD TELJESÜLT. AZ UNIVERZÁLIS TÉRIDŐ MATRIX HARMONIZÁLVA LETT.";
+            }
+        }
+
+        /* Number counter animation on scroll */
+        const counters = document.querySelectorAll('[data-target]');
+        const observerOptions = {
+            root: null,
+            threshold: 0.1
+        };
+
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const countTo = parseInt(target.getAttribute('data-target'));
+                    let currentCount = 0;
+                    const stepTime = Math.max(Math.floor(2000 / countTo), 1);
+                    
+                    const countInterval = setInterval(() => {
+                        if (countTo > 100000) {
+                            currentCount += 5000000;
+                        } else {
+                            currentCount += Math.ceil(countTo / 50);
+                        }
+                        
+                        if (currentCount >= countTo) {
+                            target.innerText = countTo.toLocaleString() + (countTo === 400 || countTo === 32 ? "+" : "");
+                            clearInterval(countInterval);
+                        } else {
+                            target.innerText = currentCount.toLocaleString();
+                        }
+                    }, 30);
+                    
+                    observer.unobserve(target);
+                }
+            });
+        }, observerOptions);
+
+        counters.forEach(c => counterObserver.observe(c));
+
+        /* Footer easter egg mechanism */
+        function triggerFooterEasterEgg() {
+            const msg = document.getElementById('easterEggMessage');
+            msg.classList.remove('hidden');
+            
+            // Fire massive shockwave strikes
+            for (let i = 0; i < 5; i++) {
+                shockwaveStrikes.push(new ShockwaveLightning(Math.random() * window.innerWidth, Math.random() * window.innerHeight));
+            }
+            
+            setTimeout(() => {
+                msg.classList.add('hidden');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
